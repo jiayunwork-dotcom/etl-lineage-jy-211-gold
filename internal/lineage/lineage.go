@@ -10,14 +10,11 @@ func Upstream(g *graph.Graph, id string) (map[string]bool, error) {
 	if !g.HasNode(id) {
 		return nil, errors.New("node not found")
 	}
-	var res map[string]bool
+	res := map[string]bool{}
 	var dfs func(string)
 	dfs = func(n string) {
 		for _, from := range g.Predecessors(n) {
 			if !res[from] {
-				if res == nil {
-					res = map[string]bool{}
-				}
 				res[from] = true
 				dfs(from)
 			}
